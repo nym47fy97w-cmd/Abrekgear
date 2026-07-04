@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-obsidian text-bone font-body antialiased;
+  }
+  ::selection {
+    @apply bg-gold text-obsidian;
+  }
+  :focus-visible {
+    outline: 2px solid #A9853E;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Nişangah köşe braketleri - marka imza öğesi */
+  .bracket-frame {
+    position: relative;
+  }
+  .bracket-frame::before,
+  .bracket-frame::after,
+  .bracket-frame .bracket-tr,
+  .bracket-frame .bracket-bl {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: theme("colors.gold.DEFAULT");
+    opacity: 0.55;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+  }
+  .bracket-frame::before {
+    top: 0;
+    left: 0;
+    border-top: 1.5px solid;
+    border-left: 1.5px solid;
+  }
+  .bracket-frame::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 1.5px solid;
+    border-right: 1.5px solid;
+  }
+  .bracket-frame .bracket-tr {
+    top: 0;
+    right: 0;
+    border-top: 1.5px solid;
+    border-right: 1.5px solid;
+  }
+  .bracket-frame .bracket-bl {
+    bottom: 0;
+    left: 0;
+    border-bottom: 1.5px solid;
+    border-left: 1.5px solid;
+  }
+  .bracket-frame:hover::before,
+  .bracket-frame:hover::after,
+  .bracket-frame:hover .bracket-tr,
+  .bracket-frame:hover .bracket-bl {
+    width: 22px;
+    height: 22px;
+    opacity: 1;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-widest2 text-gold-light;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-gold text-obsidian font-display uppercase tracking-wide text-sm px-8 py-4 transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_24px_rgba(169,133,62,0.35)];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-sand/40 text-bone font-display uppercase tracking-wide text-sm px-8 py-4 transition-all duration-300 hover:border-gold hover:text-gold-light;
+  }
+
+  .section-pad {
+    @apply px-6 md:px-10 lg:px-16 py-20 md:py-28;
+  }
+
+  .container-max {
+    @apply max-w-[1440px] mx-auto;
+  }
+
+  .hairline {
+    @apply border-t border-line;
+  }
+}
