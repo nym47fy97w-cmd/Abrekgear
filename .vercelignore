@@ -1,0 +1,6 @@
+.git
+.github
+.devcontainer
+node_modules
+*.md
+scripts

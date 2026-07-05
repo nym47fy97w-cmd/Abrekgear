@@ -27,6 +27,29 @@ npm run start
 
 > Not: Proje, `next/font/google` ile Oswald, Inter ve JetBrains Mono fontlarını kullanır. İlk `npm run build` veya `npm run dev` çalıştırmasında internet bağlantısı gerekir (fontlar derleme sırasında indirilir). Ürün görselleri `picsum.photos` üzerinden placeholder olarak servis edilir — kendi görsellerinizle değiştirmek için `lib/data.ts` içindeki `images` alanlarını güncelleyin.
 
+## Vercel'e Deploy Etme
+
+Proje, sıfır ek yapılandırmayla Vercel'de çalışacak şekilde hazırlandı (`vercel.json`, `.vercelignore` dahil).
+
+**Yöntem 1 — Vercel Dashboard (önerilen):**
+1. Projeyi GitHub'a gönderin (`npm run gh:push`).
+2. [vercel.com/new](https://vercel.com/new) adresinden GitHub reponuzu içe aktarın.
+3. Vercel, "Next.js" framework'ünü otomatik algılar — build/output ayarlarını değiştirmenize gerek yoktur.
+4. **Deploy**'a tıklayın. Birkaç dakika içinde canlı URL'niz hazır olur.
+
+**Yöntem 2 — Vercel CLI:**
+```bash
+npm install -g vercel
+vercel login
+vercel --prod
+```
+
+### Neden ek yapılandırma gerekmiyor
+- `next.config.mjs` içindeki `images.remotePatterns`, Vercel'in Image Optimization servisiyle doğrudan uyumludur (placeholder görseller `picsum.photos` üzerinden gelir).
+- `package.json` içindeki `build` (`next build`) ve `start` (`next start`) scriptleri Vercel'in varsayılan komutlarıyla birebir eşleşir.
+- `engines.node >= 18.17.0` ile Vercel'in kullanacağı Node sürümü garanti altına alınmıştır.
+- Statik olarak üretilebilen ürün/blog detay sayfaları `generateStaticParams` ile build zamanında oluşturulur; bu da Vercel'de daha hızlı sayfa yükleme sağlar.
+
 ## GitHub'a Tek Komutla Gönderme
 
 Proje, GitHub'a göndermeye hazır şekilde yapılandırıldı (`.gitignore`, `.devcontainer`, CI workflow dahil). Boş bir GitHub reponuz varsa veya [GitHub CLI](https://cli.github.com) kuruluysa, tek komutla gönderebilirsiniz:
@@ -67,6 +90,8 @@ Repo GitHub'a gönderildikten sonra, yerel kurulum yapmadan doğrudan tarayıcı
 
 ```
 abrek-gear/
+├── vercel.json                    # Vercel deploy yapılandırması
+├── .vercelignore                  # Vercel build'e dahil edilmeyecek dosyalar
 ├── .devcontainer/
 │   └── devcontainer.json          # GitHub Codespaces yapılandırması
 ├── .github/
